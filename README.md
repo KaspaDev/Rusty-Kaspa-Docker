@@ -81,21 +81,25 @@ This repository contains optimized configurations for running Kaspa nodes in pro
 If you don't have Docker and Docker Compose installed, use our automated installation script:
 
 **On Linux/macOS:**
+
 ```bash
 ./install-docker.sh
 ```
 
 **On Windows:**
+
 ```cmd
 install-docker.bat
 ```
 
 **Or run directly with Python:**
+
 ```bash
 python3 install-docker.py
 ```
 
 The installation script supports:
+
 - **Linux**: Ubuntu, Debian, CentOS, RHEL, Fedora, Arch Linux
 - **macOS**: Via Homebrew
 - **Windows**: Manual installation with guidance
@@ -263,7 +267,7 @@ The Kaspa Docker Setup Wizard is an interactive tool designed to help non-techni
 
 The setup wizard will guide you through configuring:
 
-- **Network Settings**: P2P port, HTTP API port, WebSocket RPC port, external IP
+- **Network Settings**: P2P port, gRPC port, wRPC Borsh port, wRPC JSON port, external IP
 - **Container Settings**: Container name, Docker image name and tag
 - **Data Storage**: Host directory for blockchain data, container data path
 - **System Settings**: DNS servers, user permissions
@@ -299,11 +303,11 @@ All configuration is done through environment variables in the `.env` file:
 
 ### Network Configuration
 
-- `P2P_PORT`: P2P network port (default: 16111)
-- `GRPC_PORT`: gRPC API port (default: 16110)
-- `WRPC_BORSH_PORT`: wRPC Borsh encoding port (default: 17110)
-- `WRPC_JSON_PORT`: wRPC JSON encoding port (default: 18110)
-- `EXTERNAL_IP`: External IP address (default: 0.0.0.0)
+- `P2P_PORT`: P2P network communication port (default: 16111)
+- `GRPC_PORT`: gRPC API interface port (default: 16110)
+- `WRPC_BORSH_PORT`: wRPC with Borsh encoding port (default: 17110)
+- `WRPC_JSON_PORT`: wRPC with JSON encoding port (default: 18110)
+- `EXTERNAL_IP`: External IP address for node discovery (default: 0.0.0.0)
 
 ### Container Configuration
 
@@ -365,10 +369,17 @@ docker-compose ps
 
 The following ports are exposed by default:
 
-- **16111**: P2P network communication
-- **16110**: gRPC API interface
-- **17110**: wRPC Borsh encoding (accessible at http://localhost:17110/info)
-- **18110**: wRPC JSON encoding interface
+- **16111**: P2P network communication (Mainnet)
+- **16110**: gRPC API interface (Mainnet)
+- **17110**: wRPC with Borsh encoding (Mainnet) - accessible at http://localhost:17110/info
+- **18110**: wRPC with JSON encoding (Mainnet)
+
+### Port Descriptions
+
+- **P2P Port (16111)**: Used for peer-to-peer communication with other Kaspa nodes
+- **gRPC Port (16110)**: Provides gRPC API access for programmatic interaction
+- **wRPC Borsh Port (17110)**: WebSocket RPC with Borsh binary encoding for high-performance applications
+- **wRPC JSON Port (18110)**: WebSocket RPC with JSON encoding for web applications and debugging
 
 ## Data Persistence
 
@@ -376,7 +387,7 @@ Node data is persisted in the `./research-pad-data` directory (configurable via 
 
 ## Health Checks
 
-The container includes a health check that verifies the HTTP API is responding. You can check the health status with:
+The container includes a health check that verifies the wRPC Borsh API is responding. You can check the health status with:
 
 ```bash
 docker-compose ps
