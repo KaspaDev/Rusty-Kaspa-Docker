@@ -140,9 +140,13 @@ def install_docker_ubuntu_debian():
         return False
     
     print_step("3", "Adding Docker's official GPG key")
+    # Try the modern approach first, fallback to older method
     success, _ = run_command("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg")
     if not success:
-        return False
+        print_step("3b", "Trying alternative GPG key method")
+        success, _ = run_command("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -")
+        if not success:
+            return False
     
     print_step("4", "Setting up Docker repository")
     distro_codename = subprocess.run(['lsb_release', '-cs'], capture_output=True, text=True).stdout.strip()
@@ -152,7 +156,12 @@ def install_docker_ubuntu_debian():
     elif arch == 'aarch64':
         arch = 'arm64'
     
-    repo_cmd = f"echo \"deb [arch={arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {distro_codename} stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
+    # Check if we used the modern keyring method or the older apt-key method
+    if os.path.exists('/usr/share/keyrings/docker-archive-keyring.gpg'):
+        repo_cmd = f"echo \"deb [arch={arch} signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {distro_codename} stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
+    else:
+        repo_cmd = f"echo \"deb [arch={arch}] https://download.docker.com/linux/ubuntu {distro_codename} stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
+    
     success, _ = run_command(repo_cmd, shell=True)
     if not success:
         return False
