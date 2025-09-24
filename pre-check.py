@@ -145,7 +145,7 @@ def check_docker_compose():
 
 def check_ports():
     """Check if required ports are available"""
-    required_ports = [16111, 16110, 17110, 18110]
+    required_ports = [16111, 17110, 18110]
     all_available = True
     
     for port in required_ports:

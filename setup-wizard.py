@@ -154,10 +154,6 @@ def network_configuration():
     print("This port is used for peer-to-peer communication with other Kaspa nodes.")
     p2p_port = get_input("Enter P2P port", "16111", validate_port)
     
-    # gRPC Port
-    print(f"\n{Colors.CYAN}gRPC Port{Colors.END}")
-    print("This port provides gRPC API access to your node (Mainnet: 16110).")
-    grpc_port = get_input("Enter gRPC port", "16110", validate_port)
     
     # wRPC Borsh Port
     print(f"\n{Colors.CYAN}wRPC Borsh Encoding Port{Colors.END}")
@@ -177,7 +173,7 @@ def network_configuration():
     
     # Check port availability
     print(f"\n{Colors.YELLOW}Checking port availability...{Colors.END}")
-    ports = [p2p_port, grpc_port, wrpc_borsh_port, wrpc_json_port]
+    ports = [p2p_port, wrpc_borsh_port, wrpc_json_port]
     unavailable_ports = []
     
     for port in ports:
@@ -193,7 +189,6 @@ def network_configuration():
     
     return {
         'P2P_PORT': p2p_port,
-        'GRPC_PORT': grpc_port,
         'WRPC_BORSH_PORT': wrpc_borsh_port,
         'WRPC_JSON_PORT': wrpc_json_port,
         'EXTERNAL_IP': external_ip
@@ -332,7 +327,6 @@ IMAGE_TAG={IMAGE_TAG}
 
 # Network Configuration
 P2P_PORT={P2P_PORT}
-GRPC_PORT={GRPC_PORT}
 WRPC_BORSH_PORT={WRPC_BORSH_PORT}
 WRPC_JSON_PORT={WRPC_JSON_PORT}
 EXTERNAL_IP={EXTERNAL_IP}
@@ -388,7 +382,6 @@ def show_summary(config):
     
     print(f"{Colors.YELLOW}Network Settings:{Colors.END}")
     print(f"  • P2P Port: {config['P2P_PORT']}")
-    print(f"  • gRPC Port: {config['GRPC_PORT']}")
     print(f"  • wRPC Borsh Port: {config['WRPC_BORSH_PORT']}")
     print(f"  • wRPC JSON Port: {config['WRPC_JSON_PORT']}")
     print(f"  • External IP: {config['EXTERNAL_IP']}")
@@ -426,7 +419,6 @@ def show_next_steps():
     print(f"  1. Run: {Colors.CYAN}docker compose down{Colors.END}")
     print()
     print(f"{Colors.YELLOW}Your node will be accessible at:{Colors.END}")
-    print(f"  • gRPC API: {Colors.CYAN}localhost:16110{Colors.END}")
     print(f"  • wRPC Borsh: {Colors.CYAN}ws://localhost:17110{Colors.END}")
     print(f"  • wRPC JSON: {Colors.CYAN}ws://localhost:18110{Colors.END}")
     print()

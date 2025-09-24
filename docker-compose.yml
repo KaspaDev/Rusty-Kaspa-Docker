@@ -19,7 +19,6 @@ services:
       # RPC
       - "--rpclisten=0.0.0.0:${WRPC_JSON_PORT:-18110}" # wRPC JSON encoding
       - "--rpclisten-json=0.0.0.0:${WRPC_BORSH_PORT:-17110}" # wRPC Borsh encoding
-      - "--grpclisten=0.0.0.0:${GRPC_PORT:-16110}" # gRPC API
       # Peers
       - "--addpeer=51.79.24.82:16111"
       - "--addpeer=162.55.100.124:16111"
@@ -27,7 +26,6 @@ services:
 
     ports:
       - "${P2P_PORT:-16111}:${P2P_PORT:-16111}" # P2P
-      - "${GRPC_PORT:-16110}:${GRPC_PORT:-16110}" # gRPC
       - "${WRPC_BORSH_PORT:-17110}:${WRPC_BORSH_PORT:-17110}" # wRPC Borsh
       - "${WRPC_JSON_PORT:-18110}:${WRPC_JSON_PORT:-18110}" # wRPC JSON
 

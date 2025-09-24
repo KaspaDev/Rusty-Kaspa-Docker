@@ -280,7 +280,7 @@ The Kaspa Docker Setup Wizard is an interactive tool designed to help non-techni
 
 The setup wizard will guide you through configuring:
 
-- **Network Settings**: P2P port, gRPC port, wRPC Borsh port, wRPC JSON port, external IP
+- **Network Settings**: P2P port, wRPC Borsh port, wRPC JSON port, external IP
 - **Container Settings**: Container name, Docker image name and tag
 - **Data Storage**: Host directory for blockchain data, container data path
 - **System Settings**: DNS servers, user permissions
@@ -317,7 +317,6 @@ All configuration is done through environment variables in the `.env` file:
 ### Network Configuration
 
 - `P2P_PORT`: P2P network communication port (default: 16111)
-- `GRPC_PORT`: gRPC API interface port (default: 16110)
 - `WRPC_BORSH_PORT`: wRPC with Borsh encoding port (default: 17110)
 - `WRPC_JSON_PORT`: wRPC with JSON encoding port (default: 18110)
 - `EXTERNAL_IP`: External IP address for node discovery (default: 0.0.0.0)
@@ -383,14 +382,12 @@ docker compose ps
 The following ports are exposed by default:
 
 - **16111**: P2P network communication (Mainnet)
-- **16110**: gRPC API interface (Mainnet)
 - **17110**: wRPC with Borsh encoding (Mainnet) - accessible at http://localhost:17110/info
 - **18110**: wRPC with JSON encoding (Mainnet)
 
 ### Port Descriptions
 
 - **P2P Port (16111)**: Used for peer-to-peer communication with other Kaspa nodes
-- **gRPC Port (16110)**: Provides gRPC API access for programmatic interaction
 - **wRPC Borsh Port (17110)**: WebSocket RPC with Borsh binary encoding for high-performance applications
 - **wRPC JSON Port (18110)**: WebSocket RPC with JSON encoding for web applications and debugging
 
