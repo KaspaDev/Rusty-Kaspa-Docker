@@ -1,6 +1,7 @@
 # Rusty Kaspa Docker
 
 A dynamic Docker Compose setup for running a Kaspa node with configurable environment variables.
+Chances are - your setup is taking a while, it's $slow 🐢
 
 ## Credits
 
