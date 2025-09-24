@@ -460,7 +460,7 @@ def main():
         print(f"\n{Colors.GREEN}You can now run the Kaspa Docker setup:{Colors.END}")
         print(f"  {Colors.CYAN}./pre-check.sh{Colors.END}  # Check system requirements")
         print(f"  {Colors.CYAN}./setup-wizard.sh{Colors.END}  # Configure your node")
-        print(f"  {Colors.CYAN}docker-compose up -d{Colors.END}  # Start your node")
+        print(f"  {Colors.CYAN}docker compose up -d --build{Colors.END}  # Start your node")
         return 0
     else:
         print_error("Installation verification failed")

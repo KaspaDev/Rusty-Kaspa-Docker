@@ -162,7 +162,7 @@ Before running the Kaspa Docker setup, ensure you have:
 
 3. **Start your Kaspa node:**
    ```bash
-   docker-compose up -d
+   docker compose up -d --build
    ```
 
 ### Option 2: Manual Setup (For Advanced Users)
@@ -201,7 +201,7 @@ Before running the Kaspa Docker setup, ensure you have:
 
 4. **Start the Kaspa node:**
    ```bash
-   docker-compose up -d
+   docker compose up -d --build
    ```
 
 ## System Requirements Check
@@ -357,25 +357,25 @@ All configuration is done through environment variables in the `.env` file:
 ### Start the node:
 
 ```bash
-docker-compose up -d
+docker compose up -d --build
 ```
 
 ### Stop the node:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### View logs:
 
 ```bash
-docker-compose logs -f
+docker compose logs -f
 ```
 
 ### Check status:
 
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 ## Ports
@@ -403,7 +403,7 @@ Node data is persisted in the `./research-pad-data` directory (configurable via 
 The container includes a health check that verifies the wRPC Borsh API is responding. You can check the health status with:
 
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 The health check endpoint is available at `http://localhost:17110/info` (wRPC Borsh encoding port).
