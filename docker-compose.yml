@@ -1,0 +1,53 @@
+services:
+  research-pad:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${IMAGE_NAME:-local/research-pad}:${IMAGE_TAG:-latest}
+    container_name: ${CONTAINER_NAME:-research-pad}
+    restart: unless-stopped
+
+    entrypoint: ["kaspad"]
+    command:
+      - "--yes"
+      - "--disable-upnp"
+      - "--nologfiles"
+      - "--appdir=${APP_DATA_PATH:-/app/data}"
+      - "--externalip=${EXTERNAL_IP:-0.0.0.0}"
+      # P2P (ONLY ONE listen)
+      - "--listen=0.0.0.0:${P2P_PORT:-16111}"
+      # RPC
+      - "--rpclisten=0.0.0.0:${WRPC_JSON_PORT:-18110}" # wRPC JSON encoding
+      - "--rpclisten-json=0.0.0.0:${WRPC_BORSH_PORT:-17110}" # wRPC Borsh encoding
+      - "--grpclisten=0.0.0.0:${GRPC_PORT:-16110}" # gRPC API
+      # Peers
+      - "--addpeer=51.79.24.82:16111"
+      - "--addpeer=162.55.100.124:16111"
+      - "--nodnsseed"
+
+    ports:
+      - "${P2P_PORT:-16111}:${P2P_PORT:-16111}" # P2P
+      - "${GRPC_PORT:-16110}:${GRPC_PORT:-16110}" # gRPC
+      - "${WRPC_BORSH_PORT:-17110}:${WRPC_BORSH_PORT:-17110}" # wRPC Borsh
+      - "${WRPC_JSON_PORT:-18110}:${WRPC_JSON_PORT:-18110}" # wRPC JSON
+
+    volumes:
+      - ${DATA_VOLUME_PATH:-./research-pad-data}:${APP_DATA_PATH:-/app/data}
+
+    user: "${USER_ID:-0}:${GROUP_ID:-0}"
+    dns:
+      - ${DNS_PRIMARY:-8.8.8.8}
+      - ${DNS_SECONDARY:-1.1.1.1}
+
+    ulimits:
+      nofile:
+        soft: ${ULIMIT_SOFT:-1048576}
+        hard: ${ULIMIT_HARD:-1048576}
+
+    healthcheck:
+      test:
+        ["CMD", "curl", "-f", "http://127.0.0.1:${WRPC_BORSH_PORT:-17110}/info"]
+      interval: ${HEALTH_CHECK_INTERVAL:-30s}
+      timeout: ${HEALTH_CHECK_TIMEOUT:-5s}
+      retries: ${HEALTH_CHECK_RETRIES:-20}
+      start_period: ${HEALTH_CHECK_START_PERIOD:-60s}
