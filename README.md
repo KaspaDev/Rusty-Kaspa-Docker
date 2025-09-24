@@ -74,6 +74,43 @@ This repository contains optimized configurations for running Kaspa nodes in pro
 - **Maintainability**: Automated setup and validation reduce operational overhead
 - **Monitoring**: Built-in health checks enable proactive issue detection
 
+## Installation
+
+### Docker & Docker Compose Installation
+
+If you don't have Docker and Docker Compose installed, use our automated installation script:
+
+**On Linux/macOS:**
+```bash
+./install-docker.sh
+```
+
+**On Windows:**
+```cmd
+install-docker.bat
+```
+
+**Or run directly with Python:**
+```bash
+python3 install-docker.py
+```
+
+The installation script supports:
+- **Linux**: Ubuntu, Debian, CentOS, RHEL, Fedora, Arch Linux
+- **macOS**: Via Homebrew
+- **Windows**: Manual installation with guidance
+
+### Prerequisites
+
+Before running the Kaspa Docker setup, ensure you have:
+
+- **Docker**: Version 20.10 or higher
+- **Docker Compose**: Version 2.0 or higher (standalone or plugin)
+- **Python**: Version 3.6 or higher (for pre-check and setup scripts)
+- **Disk Space**: At least 10GB free space
+- **Memory**: At least 2GB available RAM
+- **Network**: Internet connectivity for blockchain synchronization
+
 ## Quick Start
 
 ### Option 1: Easy Setup (Recommended for Beginners)
