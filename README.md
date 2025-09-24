@@ -161,10 +161,11 @@ Before running the Kaspa Docker setup, we recommend running the pre-check script
 - **Docker**: Installation and daemon status
 - **Docker Compose**: Installation (standalone or plugin)
 - **Required Files**: All necessary configuration files
-- **Ports**: Availability of required ports (16111, 17110, 18110)
+- **Ports**: Availability of required ports (16111, 16110, 17110, 18110)
 - **Disk Space**: At least 10GB free space
 - **System Memory**: At least 2GB available RAM
 - **Network**: DNS resolution and internet connectivity
+- **Hardware Performance**: CPU, memory, and storage analysis with performance recommendations
 
 ### Running the pre-check:
 
@@ -175,6 +176,39 @@ The pre-check script is available in multiple formats for cross-platform compati
 - `pre-check.bat` - Batch file for Windows
 
 All scripts perform the same comprehensive system validation and provide colored output for easy reading.
+
+### Hardware Performance Analysis
+
+The pre-check script includes advanced hardware analysis to help you understand your system's capabilities for running a Kaspa node:
+
+#### **Performance Tiers:**
+
+- **🚀 Excellent (90+ score)**: Can handle 10+ BPS (Blocks Per Second)
+  - Recommended for high-performance nodes and mining operations
+- **⚡ Very Good (75-89 score)**: Can handle 5-10 BPS
+  - Recommended for production nodes and most use cases
+- **✅ Good (60-74 score)**: Can handle 1-5 BPS
+  - Suitable for standard nodes and development/testing
+- **⚠️ Fair (45-59 score)**: Can handle 1 BPS
+  - Minimum for basic node operation, may experience issues
+- **❌ Poor (<45 score)**: Not recommended for production
+  - Consider upgrading hardware or may not sync properly
+
+#### **Hardware Components Analyzed:**
+
+- **CPU Performance**: Physical and logical cores, model detection
+- **Memory Performance**: Total and available RAM analysis
+- **Storage Performance**: Type detection (HDD/SSD/NVMe) and speed assessment
+- **Overall Rating**: Combined score with specific recommendations
+
+#### **Storage Type Detection:**
+
+- **NVMe SSD**: Excellent performance (100/100 score)
+- **SSD**: Very good performance (80/100 score)
+- **HDD**: Fair performance (40/100 score)
+- **Unknown**: Poor performance (20/100 score)
+
+The analysis provides specific recommendations for hardware upgrades and confirms if your system is suitable for running a Kaspa node at different performance levels.
 
 ## Setup Wizard
 
