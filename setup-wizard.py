@@ -430,7 +430,7 @@ def show_next_steps():
     print(f"  • wRPC Borsh: {Colors.CYAN}ws://localhost:17110{Colors.END}")
     print(f"  • wRPC JSON: {Colors.CYAN}ws://localhost:18110{Colors.END}")
     print()
-    print(f"{Colors.BLUE}For more help, visit: https://github.com/kaspanet/rusty-kaspad{Colors.END}")
+    print(f"{Colors.BLUE}For more help, visit: https://github.com/KaspaDev/Rusty-Kaspa-Docker{Colors.END}")
     print(f"{Colors.BLUE}Developed by KaspaDev (KRCBOT){Colors.END}")
 
 def main():

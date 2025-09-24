@@ -7,6 +7,19 @@ A dynamic Docker Compose setup for running a Kaspa node with configurable enviro
 **Developed by KaspaDev (KRCBOT)**  
 This project is maintained and developed by the KaspaDev / Kaspa community. Special thanks to the Kaspa community for their ongoing feedback and support.
 
+### Repository Information
+
+- **Project Repository**: [https://github.com/KaspaDev/Rusty-Kaspa-Docker](https://github.com/KaspaDev/Rusty-Kaspa-Docker)
+- **Upstream Project**: Based on the official Kaspa project
+- **Base Image**: Uses `kaspanet/rusty-kaspad:latest` as the foundation
+- **License**: MIT License
+
+### Community & Support
+
+- **Issues & Discussions**: [GitHub Issues](https://github.com/KaspaDev/Rusty-Kaspa-Docker/issues)
+- **Community**: KaspaDev Discord and community channels
+- **Documentation**: See this README for comprehensive setup and usage instructions
+
 ## TL;DR - Technical Optimizations & File Overview
 
 This repository contains optimized configurations for running Kaspa nodes in production environments, specifically designed to address hosting compliance, performance, and operational requirements.

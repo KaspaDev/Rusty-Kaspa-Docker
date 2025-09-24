@@ -604,7 +604,7 @@ def main():
     # Generate report
     success = generate_report(results)
     
-    print(f"\n{Colors.BLUE}For more information, visit: https://github.com/kaspanet/rusty-kaspad{Colors.END}")
+    print(f"\n{Colors.BLUE}For more information, visit: https://github.com/KaspaDev/Rusty-Kaspa-Docker{Colors.END}")
     print(f"{Colors.BLUE}Developed by KaspaDev (KRCBOT){Colors.END}")
     
     # Exit with appropriate code
