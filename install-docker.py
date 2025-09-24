@@ -141,12 +141,39 @@ def install_docker_ubuntu_debian():
     
     print_step("3", "Adding Docker's official GPG key")
     # Try the modern approach first, fallback to older method
-    success, _ = run_command("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg")
-    if not success:
-        print_step("3b", "Trying alternative GPG key method")
-        success, _ = run_command("curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -")
+    try:
+        # Download the key first, then process it
+        import tempfile
+        with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+            tmp_path = tmp_file.name
+        
+        # Download the GPG key
+        success, _ = run_command(f"curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o {tmp_path}")
+        if success:
+            # Process with gpg --dearmor
+            success, _ = run_command(f"sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg {tmp_path}")
+            if success:
+                os.unlink(tmp_path)  # Clean up temp file
+            else:
+                print_step("3b", "Trying alternative GPG key method")
+                # Fallback to apt-key method
+                success, _ = run_command(f"sudo apt-key add {tmp_path}")
+                os.unlink(tmp_path)  # Clean up temp file
+        else:
+            print_step("3b", "Trying alternative GPG key method")
+            # Direct apt-key method - download to temp file first
+            with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+                tmp_path = tmp_file.name
+            success, _ = run_command(f"curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o {tmp_path}")
+            if success:
+                success, _ = run_command(f"sudo apt-key add {tmp_path}")
+                os.unlink(tmp_path)  # Clean up temp file
+        
         if not success:
             return False
+    except Exception as e:
+        print_error(f"Error setting up GPG key: {e}")
+        return False
     
     print_step("4", "Setting up Docker repository")
     distro_codename = subprocess.run(['lsb_release', '-cs'], capture_output=True, text=True).stdout.strip()
