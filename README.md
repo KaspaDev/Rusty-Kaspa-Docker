@@ -120,13 +120,20 @@ The installation script supports:
 
 ### Prerequisites
 
-Before running the Kaspa Docker setup, ensure you have:
+Testing/Dev: Before running the Kaspa Docker setup, ensure you have:
 
 - **Docker**: Version 20.10 or higher
 - **Docker Compose**: Version 2.0 or higher (standalone or plugin)
 - **Python**: Version 3.6 or higher (for pre-check and setup scripts)
 - **Disk Space**: At least 10GB free space
 - **Memory**: At least 2GB available RAM
+- **Network**: Internet connectivity for blockchain synchronization
+
+Minimum Recommended Production for 10 Bps:
+
+- **Disk Space**: At least 250GB free space
+- **Memory**: At least 16GB available RAM
+- **vCpu**: 8 Cores
 - **Network**: Internet connectivity for blockchain synchronization
 
 ## Quick Start
